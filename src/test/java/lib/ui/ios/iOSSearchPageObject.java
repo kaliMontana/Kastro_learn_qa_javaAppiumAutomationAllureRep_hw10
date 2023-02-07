@@ -2,6 +2,7 @@ package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.SearchPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * В этом классе надо поменять локаторы, которые имеет wikipedia для
@@ -19,7 +20,7 @@ public class iOSSearchPageObject extends SearchPageObject {
 		SEARCH_ARTICLE_CONTAINER = "id:org.wikipedia:id/search_results_container";
 	}
 
-	public iOSSearchPageObject(AppiumDriver driver) {
+	public iOSSearchPageObject(RemoteWebDriver driver) {
 		super(driver);
 	}
 }

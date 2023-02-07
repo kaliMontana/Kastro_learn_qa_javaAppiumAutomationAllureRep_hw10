@@ -1,7 +1,7 @@
 package lib.ui.ios;
 
-import io.appium.java_client.AppiumDriver;
 import lib.ui.MyListsPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * В этом классе надо поменять локаторы, которые имеет wikipedia для
@@ -13,7 +13,7 @@ public class iOSMyListsPageObject extends MyListsPageObject {
 		TITLE = "id:org.wikipedia:id/page_list_item_title";
 	}
 
-	public iOSMyListsPageObject(AppiumDriver driver) {
+	public iOSMyListsPageObject(RemoteWebDriver driver) {
 		super(driver);
 	}
 }

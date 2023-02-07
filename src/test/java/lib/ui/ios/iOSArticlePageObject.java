@@ -2,6 +2,7 @@ package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * В этом классе надо поменять локаторы, которые имеет wikipedia для
@@ -20,7 +21,7 @@ public class iOSArticlePageObject extends ArticlePageObject {
 		SEARCH_NAME_FOLDER_BY_SUBSTRING_TPL = "xpath://*[@text='{SUBSTRING}']";
 	}
 
-	public iOSArticlePageObject(AppiumDriver driver) {
+	public iOSArticlePageObject(RemoteWebDriver driver) {
 		super(driver);
 	}
 }

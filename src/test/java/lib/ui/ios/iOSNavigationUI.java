@@ -1,7 +1,7 @@
 package lib.ui.ios;
 
-import io.appium.java_client.AppiumDriver;
 import lib.ui.NavigationUI;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * В этом классе надо поменять локаторы, которые имеет wikipedia для
@@ -12,7 +12,7 @@ public class iOSNavigationUI extends NavigationUI {
 		MY_LIST_LINK = "id:saved";
 	}
 
-	public iOSNavigationUI(AppiumDriver driver) {
+	public iOSNavigationUI(RemoteWebDriver driver) {
 		super(driver);
 	}
 }
