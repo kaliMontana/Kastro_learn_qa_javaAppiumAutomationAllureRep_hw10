@@ -10,6 +10,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 			FOOTER_ELEMENT,
 			OPTIONS_BUTTON,
 			OPTIONS_ADD_TO_MY_LIST_BUTTON,
+			OPTIONS_REMOVE_FROM_MY_LIST_BUTTON,
 			ADD_TO_MY_LIST_OVERLAY,
 			MY_LIST_NAME_INPUT,
 			MY_LIST_OK_BUTTON,
@@ -150,5 +151,19 @@ abstract public class ArticlePageObject extends MainPageObject {
 
 	public void addArticleToMySaved() {
 		this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find to add article to reading list", 5);
+	}
+
+	public void removeArticleFromSavedIfItAdded() {
+		if (this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON)) {
+			this.waitForElementAndClick(
+					OPTIONS_REMOVE_FROM_MY_LIST_BUTTON,
+					"Cannot click button to remove an article from seved",
+					2
+			);
+			this.waitForElementPresent(OPTIONS_ADD_TO_MY_LIST_BUTTON,
+					"Cannot find button to add an article to save list after removing it from find X link",
+					2
+			);
+		}
 	}
 }

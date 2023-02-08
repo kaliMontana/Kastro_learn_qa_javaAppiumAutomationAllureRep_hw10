@@ -203,6 +203,10 @@ public class MainPageObject {
 		return elements.size();
 	}
 
+	public boolean isElementPresent(String locator) {
+		return getAmountOfElements(locator) > 0;
+	}
+
 	public void assertElementNotPresent(String locator, String error_message) {
 		int amount_of_elements = getAmountOfElements(locator);
 		if (amount_of_elements > 0) {
