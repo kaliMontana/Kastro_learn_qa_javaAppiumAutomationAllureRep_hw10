@@ -133,11 +133,16 @@ abstract public class ArticlePageObject extends MainPageObject {
 	}
 
 	public void closeArticle() {
-		this.waitForElementAndClick(
-				CLOSE_ARTICLE_BUTTON,
-				"Cannot close article, cannot find X link",
-				5
-		);
+		if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()){
+			this.waitForElementAndClick(
+					CLOSE_ARTICLE_BUTTON,
+					"Cannot close article, cannot find X link",
+					5
+			);
+		} else {
+			System.out.println("Method closeArticle() does nothing for platform " + Platform.getInstance().getPlatformVar());
+		}
+
 	}
 
 	public void assertThereIsElementTitle() {
@@ -150,6 +155,9 @@ abstract public class ArticlePageObject extends MainPageObject {
 	}
 
 	public void addArticleToMySaved() {
+		if (Platform.getInstance().isMW()) {
+			removeArticleFromSavedIfItAdded();
+		}
 		this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find to add article to reading list", 5);
 	}
 

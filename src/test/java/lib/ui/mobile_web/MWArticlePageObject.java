@@ -9,7 +9,7 @@ public class MWArticlePageObject extends ArticlePageObject {
 		FOOTER_ELEMENT = "css:footer";
 		//Todo искать этот локатор если надо
 		OPTIONS_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']";
-		OPTIONS_ADD_TO_MY_LIST_BUTTON = "css:#page-actions li#page-actions-watch";
+		OPTIONS_ADD_TO_MY_LIST_BUTTON = "css:#page-actions a#ca-watch.mw-ui-icon-wikimedia-star-base20";
 		//Todo искать этот локатор если надо
 		ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button";
 		//Todo искать этот локатор если надо
@@ -19,6 +19,7 @@ public class MWArticlePageObject extends ArticlePageObject {
 		//CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
 		//Todo искать этот локатор если надо
 		SEARCH_NAME_FOLDER_BY_SUBSTRING_TPL = "xpath://*[@text='{SUBSTRING}']";
+		OPTIONS_REMOVE_FROM_MY_LIST_BUTTON = "css:#page-actions a#ca-watch.watched";
 	}
 
 	public MWArticlePageObject(RemoteWebDriver driver) {

@@ -77,7 +77,7 @@ public class MainPageObject {
 					.release()
 					.perform();
 		} else {
-			System.out.println("Method rotateScreenPortrait() does nothing for platform " + Platform.getInstance().getPlatformVar());
+			System.out.println("Method swipeUp() does nothing for platform " + Platform.getInstance().getPlatformVar());
 		}
 	}
 
@@ -90,7 +90,7 @@ public class MainPageObject {
 			JavascriptExecutor JSExecuter = (JavascriptExecutor) driver;
 			JSExecuter.executeScript("window.scrollBy(0, 250)");
 		} else {
-			System.out.println("Method rotateScreenPortrait() does nothing for platform " + Platform.getInstance().getPlatformVar());
+			System.out.println("Method scrollWebPageUp() does nothing for platform " + Platform.getInstance().getPlatformVar());
 		}
 	}
 
@@ -161,7 +161,7 @@ public class MainPageObject {
 			TouchAction action = new TouchAction((AppiumDriver) driver);
 			action.tap(point(point_to_click_x, point_to_click_y)).perform();
 		} else {
-			System.out.println("Method rotateScreenPortrait() does nothing for platform " + Platform.getInstance().getPlatformVar());
+			System.out.println("Method clickElementToTheRightUpperCorner() does nothing for platform " + Platform.getInstance().getPlatformVar());
 		}
 	}
 
@@ -193,7 +193,7 @@ public class MainPageObject {
 			action.release();
 			action.perform();
 		} else {
-			System.out.println("Method rotateScreenPortrait() does nothing for platform " + Platform.getInstance().getPlatformVar());
+			System.out.println("Method swipeElementToLeft() does nothing for platform " + Platform.getInstance().getPlatformVar());
 		}
 	}
 
@@ -205,6 +205,23 @@ public class MainPageObject {
 
 	public boolean isElementPresent(String locator) {
 		return getAmountOfElements(locator) > 0;
+	}
+
+	public void tryClickElementWithFewAttempts(String locator, String error_message, int amount_of_attempts) {
+		int current_attempts = 0;
+		boolean need_more_attempts = true;
+
+		while (need_more_attempts) {
+			try {
+				this.waitForElementAndClick(locator, error_message, 1);
+				need_more_attempts = false;
+			} catch (Exception e) {
+				if (current_attempts > amount_of_attempts) {
+					this.waitForElementAndClick(locator, error_message, 1);
+				}
+			}
+			++current_attempts;
+		}
 	}
 
 	public void assertElementNotPresent(String locator, String error_message) {
