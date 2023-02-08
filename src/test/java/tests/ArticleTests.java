@@ -14,7 +14,7 @@ public class ArticleTests extends CoreTestCase {
 
 		searchPageObject.initSearchInput();
 		searchPageObject.typeSearchLine("Java");
-		searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+		searchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
 		ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
 		String article_title = articlePageObject.getArticleTitle();
@@ -31,7 +31,7 @@ public class ArticleTests extends CoreTestCase {
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 		searchPageObject.initSearchInput();
 		searchPageObject.typeSearchLine("Java");
-		searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+		searchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
 		ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
 		articlePageObject.waitForTitleElement();
@@ -44,7 +44,7 @@ public class ArticleTests extends CoreTestCase {
 		searchPageObject.initSearchInput();
 		String search_line = "Java";
 		searchPageObject.typeSearchLine(search_line);
-		searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+		searchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
 		ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
 		articlePageObject.assertThereIsElementTitle();
