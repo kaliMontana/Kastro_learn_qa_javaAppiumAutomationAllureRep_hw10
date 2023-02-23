@@ -55,8 +55,16 @@ abstract public class MyListsPageObject extends MainPageObject {
 		);
 	}
 
+	public void waitForToOnlyArticleInWatchlistByTitle(String article_title) {
+		String article_xpath = getSavedArticleXpathByTitle(article_title);
+		this.waitForElementPresent(
+				article_xpath,
+				"Saved article still present with title " + article_title,
+				15
+		);
+	}
+
 	public void swipeArticleToDelete(String article_title) {
-		//this.waitForToArticleAppearByTitle(article_title);
 		if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
 			this.waitForToArticleAppearByTitle(article_title);
 		}

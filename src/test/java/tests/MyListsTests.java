@@ -13,8 +13,8 @@ import org.junit.Test;
 public class MyListsTests extends CoreTestCase {
 	private static final String name_of_folder = "Learning programming";
 	private static final String
-			login = "KaliTesting",
-			password = "1234321";
+			login = "qqqqaaa",
+			password = "11122233";
 
 
 	@Test
@@ -74,7 +74,11 @@ public class MyListsTests extends CoreTestCase {
 
 		searchPageObject.initSearchInput();
 		searchPageObject.typeSearchLine(searched_word_Barcelona);
-		searchPageObject.clickByArticleWithSubstring("Municipality in Catalonia, Spain");
+		if (Platform.getInstance().isAndroid()) {
+			searchPageObject.clickByArticleWithSubstring("Municipality in Catalonia, Spain");
+		} else {
+			searchPageObject.clickByArticleWithSubstring("City in Catalonia, Spain");
+		}
 
 		ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
 		articlePageObject.waitForTitleElement();
@@ -93,6 +97,7 @@ public class MyListsTests extends CoreTestCase {
 			Auth.enterLoginData(login, password);
 			Auth.submitFrom();
 
+			//Fix the Wikipedia bug
 			String url = driver.getCurrentUrl();
 			String new_url = url.substring(0, 11) + "m." + url.substring(11);
 			driver.get(new_url);
@@ -110,13 +115,22 @@ public class MyListsTests extends CoreTestCase {
 		searchPageObject.initSearchInput();
 		String searched_word_Moscow = "Moscow";
 		searchPageObject.typeSearchLine(searched_word_Moscow);
-		searchPageObject.clickByArticleWithSubstring("Capital and most populous city of Russia");
+		if (Platform.getInstance().isAndroid()) {
+			searchPageObject.clickByArticleWithSubstring("Capital and most populous city of Russia");
+		} else {
+			searchPageObject.clickByArticleWithSubstring("Capital and largest city of Russia");
+		}
 
-		articlePageObject.waitForTitleElement();
-		articlePageObject.addSecondArticleToMyList(name_of_folder);
-		articlePageObject.closeArticle();
+		if (Platform.getInstance().isAndroid()) {
+			articlePageObject.waitForTitleElement();
+			articlePageObject.addSecondArticleToMyList(name_of_folder);
+			articlePageObject.closeArticle();
+		} else {
+			articlePageObject.addArticleToMySaved();
+		}
 
 		NavigationUI navigationUI = NavigationUIFactory.get(driver);
+		navigationUI.openNavigation();
 		navigationUI.clickMyList();
 
 		MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
@@ -125,11 +139,15 @@ public class MyListsTests extends CoreTestCase {
 		}
 		myListsPageObject.swipeArticleToDelete(searched_word_Barcelona);
 
-		String second_article_title = myListsPageObject.getArticleTitle();
-		Assert.assertEquals(
-				"Titles are not the same",
-				searched_word_Moscow,
-				second_article_title
-		);
+		if (Platform.getInstance().isAndroid()) {
+			String second_article_title = myListsPageObject.getArticleTitle();
+			Assert.assertEquals(
+					"Titles are not the same",
+					searched_word_Moscow,
+					second_article_title
+			);
+		} else {
+			myListsPageObject.waitForToOnlyArticleInWatchlistByTitle(searched_word_Moscow);
+		}
 	}
 }
