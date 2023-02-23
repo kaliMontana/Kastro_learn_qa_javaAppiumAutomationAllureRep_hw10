@@ -133,7 +133,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 	}
 
 	public void closeArticle() {
-		if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()){
+		if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
 			this.waitForElementAndClick(
 					CLOSE_ARTICLE_BUTTON,
 					"Cannot close article, cannot find X link",

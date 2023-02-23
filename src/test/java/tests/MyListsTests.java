@@ -14,7 +14,7 @@ public class MyListsTests extends CoreTestCase {
 	private static final String name_of_folder = "Learning programming";
 	private static final String
 			login = "KaliTesting",
-			password = "commandoX12";
+			password = "1234321";
 
 
 	@Test
@@ -39,6 +39,11 @@ public class MyListsTests extends CoreTestCase {
 			Auth.clickAuthButton();
 			Auth.enterLoginData(login, password);
 			Auth.submitFrom();
+
+			//Fix the Wikipedia bug
+			String url = driver.getCurrentUrl();
+			String new_url = url.substring(0, 11) + "m." + url.substring(11);
+			driver.get(new_url);
 
 			articlePageObject.waitForTitleElement();
 			assertEquals("We are not on the same page after login",
@@ -66,17 +71,42 @@ public class MyListsTests extends CoreTestCase {
 	public void testSaveTwoArticlesToMyList() {
 		String searched_word_Barcelona = "Barcelona";
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
+
 		searchPageObject.initSearchInput();
 		searchPageObject.typeSearchLine(searched_word_Barcelona);
-		searchPageObject.clickByArticleWithSubstring("City in Catalonia, Spain");
+		searchPageObject.clickByArticleWithSubstring("Municipality in Catalonia, Spain");
 
 		ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
 		articlePageObject.waitForTitleElement();
-		String name_of_folder = "Doing the homework";
-		articlePageObject.addArticleToMyList(name_of_folder);
-		articlePageObject.closeArticle();
+		String article_title = articlePageObject.getArticleTitle();
 
-		//Is this began steps to second article
+		String name_of_folder = "Doing the homework";
+		if (Platform.getInstance().isAndroid()) {
+			articlePageObject.addArticleToMyList(name_of_folder);
+			articlePageObject.closeArticle();
+		} else {
+			articlePageObject.addArticleToMySaved();
+		}
+		if (Platform.getInstance().isMW()) {
+			AuthorizationPageObject Auth = new AuthorizationPageObject(driver);
+			Auth.clickAuthButton();
+			Auth.enterLoginData(login, password);
+			Auth.submitFrom();
+
+			String url = driver.getCurrentUrl();
+			String new_url = url.substring(0, 11) + "m." + url.substring(11);
+			driver.get(new_url);
+
+			articlePageObject.waitForTitleElement();
+			assertEquals("We are not on the same page after login",
+					article_title,
+					articlePageObject.getArticleTitle()
+			);
+
+			articlePageObject.addArticleToMySaved();
+		}
+
+		//Beginning steps to second article
 		searchPageObject.initSearchInput();
 		String searched_word_Moscow = "Moscow";
 		searchPageObject.typeSearchLine(searched_word_Moscow);
@@ -90,14 +120,16 @@ public class MyListsTests extends CoreTestCase {
 		navigationUI.clickMyList();
 
 		MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
-		myListsPageObject.openFolderByName(name_of_folder);
+		if (Platform.getInstance().isAndroid()) {
+			myListsPageObject.openFolderByName(name_of_folder);
+		}
 		myListsPageObject.swipeArticleToDelete(searched_word_Barcelona);
 
-		String article_title = myListsPageObject.getArticleTitle();
+		String second_article_title = myListsPageObject.getArticleTitle();
 		Assert.assertEquals(
 				"Titles are not the same",
 				searched_word_Moscow,
-				article_title
+				second_article_title
 		);
 	}
 }
