@@ -1,1 +1,1 @@
-# Kastro_learn_qa_javaAppiumAutomationWeb_hw8
+# Kastro_learn_qa_javaAppiumAutomationAllureRep_hw10
