@@ -46,7 +46,7 @@ public class MyListsTests extends CoreTestCase {
 			driver.get(new_url);
 
 			articlePageObject.waitForTitleElement();
-			assertEquals("We are not on the same page after login",
+			Assert.assertEquals("We are not on the same page after login",
 					article_title,
 					articlePageObject.getArticleTitle()
 			);
@@ -103,7 +103,7 @@ public class MyListsTests extends CoreTestCase {
 			driver.get(new_url);
 
 			articlePageObject.waitForTitleElement();
-			assertEquals("We are not on the same page after login",
+			Assert.assertEquals("We are not on the same page after login",
 					article_title,
 					articlePageObject.getArticleTitle()
 			);
