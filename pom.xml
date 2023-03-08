@@ -46,7 +46,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<aspectj.version>1.9.5</aspectj.version>
-		<allure.version>2.13.6</allure.version>
+		<allure.version>2.8.1</allure.version>
 	</properties>
 
 	<build>
