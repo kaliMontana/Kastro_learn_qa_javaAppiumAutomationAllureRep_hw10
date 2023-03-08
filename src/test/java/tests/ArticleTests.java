@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 public class ArticleTests extends CoreTestCase {
 	@Test
+	@DisplayName("Compare article with expected one")
 	public void testCompareArticleTitle() {
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -28,6 +30,7 @@ public class ArticleTests extends CoreTestCase {
 	}
 
 	@Test
+	@DisplayName("swipe article to the footer")
 	public void testSwipeArticle() {
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 		searchPageObject.initSearchInput();
