@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -28,10 +29,12 @@ abstract public class ArticlePageObject extends MainPageObject {
 	}
 	/*TEMPLATE METHODS*/
 
+	@Step("Waiting for title on the article page")
 	public WebElement waitForTitleElement() {
 		return this.waitForElementPresent(TITLE, "Cannot find article title on page!", 15);
 	}
 
+	@Step("Get article title")
 	public String getArticleTitle() {
 		WebElement title_element = waitForTitleElement();
 		if (Platform.getInstance().isAndroid()) {
@@ -43,6 +46,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 		}
 	}
 
+	@Step("Swiping to footer on the article page")
 	public void swipeToFooter() {
 		if (Platform.getInstance().isAndroid()) {
 			this.swipeUpToFindElement(
@@ -63,6 +67,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 		}
 	}
 
+	@Step("Adding the article to my list")
 	public void addArticleToMyList(String name_of_folder) {
 		this.waitForElementAndClick(
 				OPTIONS_BUTTON,
@@ -132,6 +137,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 		);
 	}
 
+	@Step("Closing the article")
 	public void closeArticle() {
 		if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
 			this.waitForElementAndClick(
@@ -154,6 +160,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 		);
 	}
 
+	@Step("Adding the article to my saved articles")
 	public void addArticleToMySaved() {
 		if (Platform.getInstance().isMW()) {
 			removeArticleFromSavedIfItAdded();
@@ -161,6 +168,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 		this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find to add article to reading list", 5);
 	}
 
+	@Step("Removing the article from saved if it hs been added")
 	public void removeArticleFromSavedIfItAdded() {
 		if (this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON)) {
 			this.waitForElementAndClick(
