@@ -24,6 +24,7 @@
 *.iml
 *.apk
 *.exe
+*.png
 
 # Project gen files
 .idea
