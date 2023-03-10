@@ -113,6 +113,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 		);
 	}
 
+	@Step("Adding a second article to my list")
 	public void addSecondArticleToMyList(String name_of_folder) {
 		this.waitForElementAndClick(
 				OPTIONS_BUTTON,
@@ -152,6 +153,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
 	}
 
+	@Step("Checking if the title exists")
 	public void assertThereIsElementTitle() {
 		this.assertElementPresent(
 				TITLE,

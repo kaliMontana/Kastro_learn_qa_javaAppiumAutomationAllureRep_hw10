@@ -54,6 +54,10 @@ public class ArticleTests extends CoreTestCase {
 	}
 
 	@Test
+	@Features(value = {@Feature(value = "Search"), @Feature(value = "Article")})
+	@DisplayName("Checking if in the article page there in title")
+	@Description("When the article page is opened checking if there is title and it matches with the title in search result list")
+	@Severity(value = SeverityLevel.MINOR)
 	public void testCheckElementPresent() {
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 		searchPageObject.initSearchInput();

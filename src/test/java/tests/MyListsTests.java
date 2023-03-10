@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -18,6 +20,11 @@ public class MyListsTests extends CoreTestCase {
 
 
 	@Test
+	@Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "My list"),
+			@Feature(value = "Add Article "), @Feature(value = "Authorization"), @Feature(value = "Swipe")})
+	@DisplayName("Save the first article to 'My list'")
+	@Description("We save the first article to 'My list' and then we delete it")
+	@Severity(value = SeverityLevel.NORMAL)
 	public void testSaveFirstArticleToMyList() {
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -40,7 +47,7 @@ public class MyListsTests extends CoreTestCase {
 			Auth.enterLoginData(login, password);
 			Auth.submitFrom();
 
-			//Fix the Wikipedia bug
+			//Fix the Wikipedia bug in the web version
 			String url = driver.getCurrentUrl();
 			String new_url = url.substring(0, 11) + "m." + url.substring(11);
 			driver.get(new_url);
@@ -68,6 +75,11 @@ public class MyListsTests extends CoreTestCase {
 	}
 
 	@Test
+	@Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "My list"),
+			@Feature(value = "Add Article "), @Feature(value = "Authorization"), @Feature(value = "Swipe")})
+	@DisplayName("Save two articles to 'My list'")
+	@Description("We save two articles to 'My list' and then we delete one of its")
+	@Severity(value = SeverityLevel.NORMAL)
 	public void testSaveTwoArticlesToMyList() {
 		String searched_word_Barcelona = "Barcelona";
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
